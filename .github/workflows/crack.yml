@@ -1,0 +1,22 @@
+name: SuperCrack
+
+on:
+  workflow_dispatch: # 手动触发
+
+jobs:
+  run_job:
+    runs-on: ubuntu-latest
+    permissions: {contents: write}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Init
+        uses: actions/setup-python@v5
+        with: {python-version: '3.10'}
+      - run: pip install requests
+      - name: Start Cracking
+        run: python scanner.py
+      - name: Save
+        run: |
+          git config --local user.name "bot"
+          git config --local user.email "bot@github.com"
+          git add config_v2.txt && git commit -m "done" && git push || exit 0
