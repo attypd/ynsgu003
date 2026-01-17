@@ -1,0 +1,1 @@
+❌ 失败原因: HTTPConnectionPool(host='focus169.org', port=48719): Max retries exceeded with url: /68a6abe2000dd5d9a5012600500a1279 (Caused by ConnectTimeoutError(<HTTPConnection(host='focus169.org', port=48719) at 0x7f612b819780>, 'Connection to focus169.org timed out. (connect timeout=80)'))
