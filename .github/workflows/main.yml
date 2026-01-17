@@ -2,15 +2,14 @@ name: UpdatePort
 
 on:
   schedule:
-    # 对应北京时间 06:30 - 23:30 每 30 分钟运行 (UTC 22:30 - 15:30)
     - cron: '30 22-23 * * *'
     - cron: '0,30 0-15 * * *'
-  workflow_dispatch: # 凌晨 00:00 - 06:30 支持你手动点 Run
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions: {contents: write, actions: write} # 开启写入和清理权限
+    permissions: {contents: write, actions: write}
     steps:
       - uses: actions/checkout@v4
       - run: python scanner.py
@@ -19,8 +18,10 @@ jobs:
           git config --local user.email "bot@github.com"
           git add config_v2.txt && git commit -m "update" && git push || exit 0
       
-      # 清理旧运行记录，只留1天
-      - uses: Mattraiano/delete-old-workflow-runs@v2
+      - name: Delete old workflow runs
+        uses: Mattraiano/delete-old-workflow-runs@v2
         with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
           retain_days: 1
           keep_minimum_runs: 1
