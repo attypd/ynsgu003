@@ -12,12 +12,22 @@ jobs:
     permissions: {contents: write, actions: write}
     steps:
       - uses: actions/checkout@v4
-      - run: python scanner.py
-      - run: |
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run Scanner
+        run: python scanner.py
+
+      - name: Commit and Push
+        run: |
           git config --local user.name "bot"
           git config --local user.email "bot@github.com"
           git add config_v2.txt && git commit -m "update" && git push || exit 0
       
+      # 彻底修正：拼写必须是 Mattraiano（双 t，大写 M）
       - name: Delete old workflow runs
         uses: Mattraiano/delete-old-workflow-runs@v2
         with:
