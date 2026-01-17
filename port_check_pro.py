@@ -1,58 +1,47 @@
 import socket
+from concurrent.futures import ThreadPoolExecutor
 import time
 
-# --- P3P 专攻配置 ---
+# --- 核心配置 ---
 HOST = "focus169.org"
-PORT = 48719
-TOKEN = "68a6abe2000dd5d9a5012600500a1279"
+# 这里的 Token 只要有一个活的，整个端口就是通的
+TOKEN_SAMPLES = {
+    "凤凰中文": "68a6abe2000dd5d9a5012600500a1279",
+    "凤凰资讯": "694531d0000414f210386f2756d64099"
+}
+# 重点扫 48719 周边的开口
+SCAN_PORTS = [48719, 48718, 48720, 8080, 80, 8000]
 
-def p3p_raw_probe():
-    print(f"📡 启动 P3P 协议原始套接字探测: {HOST}:{PORT}")
-    
-    # 构造一个符合 P3P/P2P 壳子特征的原始二进制请求
-    # 这种源不需要完整的 HTTP 报文，它们更看重底层的 Keep-Alive 活性
-    raw_request = (
-        f"GET /{TOKEN} HTTP/1.1\r\n"
-        f"Host: {HOST}:{PORT}\r\n"
-        "User-Agent: okhttp/3.12.13\r\n"
-        "Accept: */*\r\n"
-        "Connection: Keep-Alive\r\n"
-        "P3P: CP='CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR'\r\n\r\n"
-    ).encode('utf-8')
-
-    start_t = time.time()
+def p3p_knock(port):
+    """
+    像壳子一样快速敲门，不纠结 P3P 握手数据，只看端口是否存活
+    """
     try:
-        # 1. 建立原始 TCP 连接
-        sock = socket.create_connection((HOST, PORT), timeout=10)
-        print("🔗 TCP 物理层已连通，开始注入 P3P 握手信号...")
-        
-        sock.sendall(raw_request)
-        
-        # 2. 针对 48 秒延迟，我们进入“静默监听”模式
-        # P3P 源在准备好数据前不会回任何东西，我们只看连接是否被强踢
-        sock.settimeout(100) 
-        
-        # 尝试读取前 1 字节（只要能读到，说明协议握手成功）
-        data = sock.recv(1)
-        
-        if data:
-            print(f"✅ 【P3P 撞击成功】耗时 {time.time()-start_t:.1f}s 捕获到协议数据包！")
-            with open("active_port.txt", "w") as f:
-                f.write(f"凤凰中文,http://{HOST}:{PORT}/{TOKEN}")
-            return
-            
-    except socket.timeout:
-        # 如果超时但没被拒绝，对 P3P 源来说大概率也是活的
-        print("⚠️ 握手超时但连接未断开，该端口具备 P3P 典型挂起特征。")
-        with open("active_port.txt", "w") as f:
-            f.write(f"凤凰中文(待测),http://{HOST}:{PORT}/{TOKEN}")
-    except Exception as e:
-        msg = f"❌ P3P 探测崩溃: {str(e)}"
-        print(msg)
-        with open("active_port.txt", "w") as f:
-            f.write(msg)
-    finally:
-        if 'sock' in locals(): sock.close()
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(2) # 2秒不通直接滚，这就是效率
+        result = s.connect_ex((HOST, port))
+        if result == 0:
+            return port
+        s.close()
+    except:
+        pass
+    return None
 
 if __name__ == "__main__":
-    p3p_raw_probe()
+    print(f"📡 正在以 P3P 并发模式探测 {HOST}...")
+    start_time = time.time()
+    
+    # 使用 10 个线程并发，瞬间扫完所有备选端口
+    with ThreadPoolExecutor(max_workers=10) as executor:
+        active_ports = list(filter(None, executor.map(p3p_knock, SCAN_PORTS)))
+    
+    if active_ports:
+        print(f"🔥 捕获到有效开口: {active_ports}")
+        with open("active_port.txt", "w", encoding="utf-8") as f:
+            for p in active_ports:
+                for name, token in TOKEN_SAMPLES.items():
+                    # 按照你截图中显示的 p3p 格式输出
+                    f.write(f"{name},p3p://{HOST}:{p}/{token}\n")
+        print(f"✅ 探测成功，总耗时: {time.time()-start_time:.1f}秒")
+    else:
+        print("❌ 核心端口全军覆没，可能 IP 被封锁。")
