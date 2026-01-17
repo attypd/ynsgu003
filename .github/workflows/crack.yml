@@ -1,0 +1,48 @@
+name: P3P_Turbo_Scan
+
+on:
+  workflow_dispatch: # 允许你手动点击按钮开始扫描
+
+jobs:
+  turbo_scan:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: System Engine Scan
+        run: |
+          # 1. 安装系统底层扫描工具 nc (Netcat)
+          sudo apt-get update && sudo apt-get install -y netcat-openbsd
+
+          # 2. 配置扫描目标
+          TARGET_HOST="focus169.org"
+          TARGET_PORT="48719"
+          
+          echo "📡 正在尝试物理撞击端口 $TARGET_HOST:$TARGET_PORT ..."
+          
+          # 3. 使用 nc 进行极速物理探测 (不进屋说话，只看大门开没开)
+          # -z: 仅扫描; -v: 详细; -w 1: 1秒超时
+          if nc -zv -w 1 $TARGET_HOST $TARGET_PORT 2>&1 | grep -q "succeeded"; then
+            echo "✅ 端口开启！正在按 P3P 格式生成最新结果..."
+            # 严格按照你要求的 p3p:// 格式直接生成文件
+            echo "凤凰中文,p3p://$TARGET_HOST:$TARGET_PORT/68a6abe2000dd5d9a5012600500a1279" > active_port.txt
+            echo "凤凰资讯,p3p://$TARGET_HOST:$TARGET_PORT/694531d0000414f210386f2756d64099" >> active_port.txt
+            echo "凤凰香港台,p3p://$TARGET_HOST:$TARGET_PORT/68a6b0e900041c3da514c6d1105e4d0d" >> active_port.txt
+            echo "翡翠台,p3p://$TARGET_HOST:$TARGET_PORT/694533620009fd15103e92fc6c853ea8" >> active_port.txt
+          else
+            echo "❌ 端口物理封锁。"
+            # 写入带时间戳的失败记录，确保你知道脚本跑过了
+            echo "❌ 扫描完成时间 $(date)，检测到物理层封锁，GitHub IP 可能被禁。" > active_port.txt
+          fi
+
+      - name: Commit and Push Result
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add active_port.txt
+          # 只有文件有变动时才提交，防止任务报错
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Update P3P results" && git push)
