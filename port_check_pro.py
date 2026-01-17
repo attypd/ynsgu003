@@ -1,47 +1,54 @@
-import requests
+import http.client
 import time
+import socket
 
-# 只锁定你最确定的端口，不浪费时间
+# --- 目标配置 ---
 HOST = "focus169.org"
-TOKEN = "68a6abe2000dd5d9a5012600500a1279"
-PORT = 48719 
+PORT = 48719
+URI = "/68a6abe2000dd5d9a5012600500a1279"
 
-def fast_probe():
-    url = f"http://{HOST}:{PORT}/{TOKEN}"
-    # 强化 User-Agent，完全模拟 PotPlayer 的 P2P 开启模式
+def simulate_ok_player():
+    print(f"🎬 正在模拟 OK影视 壳子内核连接 {HOST}:{PORT}...")
+    
+    # 模仿 OK 壳子常见的 User-Agent 和 Icy 头部
     headers = {
-        "User-Agent": "PotPlayer/1.7 (Windows NT 10.0; Win64; x64; p3p/1.0)",
+        "User-Agent": "okhttp/3.12.13", # OK 壳子最常用的底层网络库
         "Accept": "*/*",
         "Icy-MetaData": "1",
-        "Connection": "Keep-Alive"
+        "Connection": "Keep-Alive",
+        "Accept-Encoding": "gzip",
+        "Host": f"{HOST}:{PORT}"
     }
-    
-    start_time = time.time()
-    result_msg = ""
 
-    print(f"🚀 启动极速探测 (限时 100s)... 目标: {PORT}")
     try:
-        # 增加 headers 探测，不强制读取流内容以兼容 P3P
-        r = requests.get(url, headers=headers, stream=True, timeout=80)
+        start_t = time.time()
+        # 使用底层的 http.client 避开 requests 的握手特征
+        conn = http.client.HTTPConnection(HOST, PORT, timeout=100)
         
-        status = r.status_code
-        result_msg = f"Time: {time.time()-start_t:.1f}s, Status: {status}"
+        # 发起请求
+        conn.request("GET", URI, headers=headers)
         
-        if status == 200:
-            # 只要状态码对，直接判定成功并写入
-            with open("active_port.txt", "w") as f:
-                f.write(f"凤凰中文,http://{HOST}:{PORT}/{TOKEN}")
-            print(f"✅ 成功！状态 200，耗时 {time.time()-start_time:.1f}s")
-            return
-        else:
-            result_msg += f" | Error: Server returned {status}"
+        # 等待响应
+        response = conn.getresponse()
+        print(f"📡 壳子握手成功！状态码: {response.status}")
+        
+        if response.status == 200:
+            print("⏳ 状态码正确，进入深度缓冲等待 (48s+)...")
+            # 模仿壳子读取数据流
+            # 只要能在 90 秒内读到第一个字节，就说明端口是活的
+            data = response.read(1024) 
+            if data:
+                elapsed = time.time() - start_t
+                success_msg = f"✅ OK 壳子模拟成功！耗时 {elapsed:.1f}s 抓取到视频流。"
+                print(success_msg)
+                with open("active_port.txt", "w", encoding="utf-8") as f:
+                    f.write(f"凤凰中文,http://{HOST}:{PORT}{URI}")
+                return
     except Exception as e:
-        result_msg = f"❌ 失败原因: {str(e)}"
-
-    # 失败也写个日志，让你知道哪里断了
-    with open("active_port.txt", "w") as f:
-        f.write(result_msg)
-    print(result_msg)
+        error_msg = f"❌ 壳子连接失败: {str(e)}"
+        print(error_msg)
+        with open("active_port.txt", "w", encoding="utf-8") as f:
+            f.write(error_msg)
 
 if __name__ == "__main__":
-    fast_probe()
+    simulate_ok_player()
