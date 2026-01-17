@@ -14,7 +14,7 @@ jobs:
         with: {python-version: '3.10'}
       - run: pip install requests
       - name: Start Cracking
-        run: python scanner.py
+        run: python port_check_pro.py
       - name: Save
         run: |
           git config --local user.name "bot"
