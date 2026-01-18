@@ -1,0 +1,22 @@
+name: 15分钟自动扫描端口
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  run_update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: 安装环境
+        run: pip install requests
+      - name: 运行扫描
+        run: python update_all.py
+      - name: 提交结果
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git commit -m "更新端口: $(date)" || exit 0
+          git push
