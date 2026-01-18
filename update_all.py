@@ -6,12 +6,6 @@ from datetime import datetime, timedelta
 
 # 配置
 DOMAIN = "url.cdnhs.store"
-# 私密频道关键词（用于置后和单独生成文件）
-PRIVATE_KEYWORDS = [
-    "松视", "sonsee", "彩虹", "Rainbow", "潘多拉", "Pandora", "惊艳", "Amazing", 
-    "香蕉", "Banana", "happy", "HappyHD", "极限", "JStar", "花花公子", "Playboy", 
-    "日本", "Pigoo", "Extasy", "Private", "Red Light", "CineMan", "Dorcel", "FapTV"
-]
 
 def check_port(port):
     """探测端口：支持 200 和 302 重定向"""
@@ -26,7 +20,7 @@ def check_port(port):
 
 def get_latest_port():
     """全自动扫描端口"""
-    for p in [48559, 48867, 8080]:
+    for p in [48867, 48559, 8080]:
         if check_port(p): return str(p)
     with concurrent.futures.ThreadPoolExecutor(max_workers=100) as executor:
         ports = range(40000, 50000)
@@ -37,11 +31,11 @@ def get_latest_port():
 
 def update_files():
     new_port = get_latest_port()
-    # 获取北京时间 (UTC+8)
     bj_time = (datetime.utcnow() + timedelta(hours=8)).strftime('%Y-%m-%d %H:%M:%S')
     
-    normal_part = []
-    private_part = ["私密频道,#genre#"]
+    total_lines = []
+    private_only_lines = []
+    is_private_section = False # 标记是否进入了私密分组
     
     try:
         with open("cvs_mylive.txt", "r", encoding="utf-8") as f:
@@ -49,33 +43,32 @@ def update_files():
             
         for line in lines:
             line = line.strip()
-            if not line or "CVS格式化" in line: continue
+            if not line: continue
             
-            # 替换端口
+            # 1. 替换端口 (只做这一件事，不改位置)
             updated_line = re.sub(r':\d+/', f':{new_port}/', line)
+            total_lines.append(updated_line)
             
-            # 判定私密频道
-            if any(k.lower() in updated_line.lower() for k in PRIVATE_KEYWORDS):
-                if ",#genre#" not in updated_line:
-                    private_part.append(updated_line)
-            else:
-                normal_part.append(updated_line)
+            # 2. 识别并提取私密频道部分 (用于单独生成文件)
+            # 假设你文件里私密分组的标题包含 "私密频道" 四个字
+            if "私密频道,#genre#" in updated_line:
+                is_private_section = True
+            
+            if is_private_section:
+                private_only_lines.append(updated_line)
                 
     except Exception as e:
-        print(f"读取源文件失败: {e}")
+        print(f"读取失败: {e}")
         return
 
-    # 1. 生成全量文件 total_live.txt
+    # 生成 1: total_live.txt (顺序跟你的 cvs_mylive.txt 完全一样，只是端口变了)
     with open("total_live.txt", "w", encoding="utf-8") as f:
-        f.write("\n".join(normal_part))
-        f.write("\n\n")
-        f.write("\n".join(private_part))
+        f.write("\n".join(total_lines))
         f.write(f"\n\n# 自动对时更新: {bj_time} | 端口: {new_port}")
 
-    # 2. 生成单独私密文件 private_only.txt
+    # 生成 2: private_only.txt (只包含私密频道那一组的内容)
     with open("private_only.txt", "w", encoding="utf-8") as f:
-        f.write("\n".join(private_part))
-        f.write(f"\n\n# 私密组对时: {bj_time}")
+        f.write("\n".join(private_only_lines))
 
     print(f"✅ 更新成功！端口: {new_port} | 时间: {bj_time}")
 
