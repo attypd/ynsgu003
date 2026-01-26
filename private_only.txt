@@ -1,4 +1,4 @@
-私密频道~1818,#genre#
+私密频道_1818,#genre#
 松视1,http://url.cdnhs.store:49784/hstw.php?id=sonsee1
 松视2,http://url.cdnhs.store:49784/hstw.php?id=sonsee2
 松视3,http://url.cdnhs.store:49784/hstw.php?id=SonSee3hd
@@ -51,4 +51,4 @@ XY Plus,http://url.cdnhs.store:49784/hstw.php?id=XYPlus
 XY Mix,http://url.cdnhs.store:49784/hstw.php?id=XYMix
 XXL,http://url.cdnhs.store:49784/hstw.php?id=XXL
 
-# 对时: 2026-01-26 13:05:31
+# 对时: 2026-01-26 13:49:24
