@@ -878,4 +878,4 @@ XY Plus,http://url.cdnhs.store:40739/hstw.php?id=XYPlus
 XY Mix,http://url.cdnhs.store:40739/hstw.php?id=XYMix
 XXL,http://url.cdnhs.store:40739/hstw.php?id=XXL
 
-# 自动对时更新: 2026-01-26 10:36:31 | 当前端口: 40739
+# 自动对时更新: 2026-01-26 12:10:58 | 当前端口: 40739
