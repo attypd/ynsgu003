@@ -1,32 +1,40 @@
-name: 10-Min Monitor & Emergency Sync
+name: 15分钟自动扫描对时更新
 
 on:
   schedule:
-    - cron: '*/10 * * * *'  # 每10分钟巡检一次，比002和280更频繁
-  workflow_dispatch:        # 支持手动点击“Run workflow”强制扫描
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
-  monitor_job:
+  update:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Install dependencies
+      - name: Install requests
         run: pip install requests
 
-      - name: Run Monitor Script
+      - name: Run Monitor and Scan
         run: python monitor_and_sync.py
 
       - name: Commit and Push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add .
-          git commit -m "Monitor Sync: $(TZ='Asia/Shanghai' date +'%Y-%m-%d %H:%M:%S')" || exit 0
-          git push
+          if [ -n "$(git status --porcelain)" ]; then
+            git add .
+            git pull --rebase origin main  # 关键：解决 Push 冲突
+            git commit -m "Monitor Sync: $(date +'%Y-%m-%d %H:%M:%S')"
+            git push origin main
+          fi
