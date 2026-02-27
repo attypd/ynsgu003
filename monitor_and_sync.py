@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 # --- 配置信息 ---
 DOMAIN = "url.cdnhs.store"
 # 仅输出这两个文件
-TARGET_FILES = ["cvs_mylive.txt", "monitor_live.txt"]
+TARGET_FILES = ["monitor_live.txt"]
 
 # 监控 280 和 002
 MONITOR_SOURCES = [
