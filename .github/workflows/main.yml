@@ -25,16 +25,17 @@ jobs:
       - name: Install requests
         run: pip install requests
 
-      - name: Run Monitor and Scan
-        run: python monitor_and_sync.py
-
-      - name: Commit and Push
+      - name: Sync and Run
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
+          git pull --rebase origin main
+          
+          # 003 使用 monitor_and_sync.py
+          python monitor_and_sync.py
+          
           if [ -n "$(git status --porcelain)" ]; then
             git add .
-            git pull --rebase origin main  # 关键：解决 Push 冲突
             git commit -m "Monitor Sync: $(date +'%Y-%m-%d %H:%M:%S')"
             git push origin main
           fi
