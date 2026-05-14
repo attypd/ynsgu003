@@ -1,0 +1,111 @@
+{
+  "logo": "./logo.gif",
+  "sites": [
+    {
+      "key": "豆瓣资源",
+      "name": "豆瓣资源",
+      "type": 1,
+      "api": "https://caiji.dbzy5.com/api.php/provide/vod/at/josn/",
+      "playUrl": "",
+      "searchable": 1,
+      "quickSearch": 1
+    },
+    {
+      "key": "*淫水机资源",
+      "name": "🔞淫水机",
+      "type": 0,
+      "api": "https://www.xrbsp.com/api/xml.php",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0
+    },
+    {
+      "key": "*美少女资源",
+      "name": "🔞美少女资源",
+      "type": 0,
+      "api": "https://www.msnii.com/api/xml.php",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 0
+    },
+    {
+      "key": "💞白嫖资源💞",
+      "name": "💞白嫖资源💞",
+      "type": 0,
+      "api": "https://www.kxgav.com/api/xml.php",
+      "searchable": 0,
+      "quickSearch": 0
+    },
+    {
+      "key": "💞香奶儿资源💞",
+      "name": "💞香奶儿资源💞",
+      "type": 0,
+      "api": "https://www.gdlsp.com/api/xml.php",
+      "searchable": 0,
+      "quickSearch": 0
+    },
+    {
+      "key": "💞番号资源💞",
+      "name": "💞番号资源💞",
+      "type": 1,
+      "api": "http://fhapi9.com/api.php/provide/vod/",
+      "searchable": 0,
+      "quickSearch": 0
+    },
+    {
+      "key": "py_非凡资源无广",
+      "name": "🍎非凡资源无广(T3)",
+      "type": 3,
+      "api": "https://gcore.jsdelivr.net/gh/doube-ba/TVlogo/py/采集去广模板.py",
+      "searchable": 1,
+      "quickSearch": 0,
+      "filterable": 0,
+      "changeable": 0,
+      "ext": {
+        "url": "http://ffzy.tv/api.php/provide/vod/from/ffm3u8/at/json/",
+        "a": [
+          1,
+          2,
+          3
+        ]
+      }
+    },
+    {
+      "key": "py_电影天堂无广",
+      "name": "🍎电影天堂无广(T3)",
+      "type": 3,
+      "api": "https://gcore.jsdelivr.net/gh/doube-ba/TVlogo/py/采集去广模板.py",
+      "searchable": 1,
+      "quickSearch": 0,
+      "filterable": 0,
+      "changeable": 0,
+      "ext": {
+        "url": "http://caiji.dyttzyapi.com/api.php/provide/vod/from/dyttm3u8/at/json/",
+        "a": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          33
+        ]
+      }
+    }
+  ],
+  "lives": [
+    {
+      "name": "(直播)SMT(py)",
+      "type": 3,
+      "url": "https://gcore.jsdelivr.net/gh/doube-ba/TVlogo/smt.txt",
+      "api": "https://gcore.jsdelivr.net/gh/doube-ba/TVlogo/py/SMT.py",
+      "ext": []
+    },
+    {
+      "name": "(直播)快直播(py)",
+      "type": 3,
+      "url": "",
+      "api": "https://gcore.jsdelivr.net/gh/doube-ba/TVlogo/py/快直播.py",
+      "ext": []
+    }
+  ]
+}
