@@ -1,0 +1,15 @@
+{
+  "spider": "",
+  "wallpaper": "https://tu.ltyuan.top/api.php",
+  "sites": [
+    {
+      "key": "hclyz_live_picture",
+      "name": " 💃 聚合美女直播 | 海报墙点播模式",
+      "type": 3,
+      "api": "https://raw.githubusercontent.com/attypd/ynsgu003/main/hclyz_vod.js",
+      "searchable": 0,
+      "quickSearch": 0,
+      "filterable": 0
+    }
+  ]
+}
