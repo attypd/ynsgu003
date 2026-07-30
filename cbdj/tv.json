@@ -2,14 +2,40 @@
   "spider": "https://gh-proxy.org/https://raw.githubusercontent.com/h520021/xbpq/main/xbpq.jar",
   "sites": [
     {
-      "key": "51cbdj",
-      "name": "51吃瓜擦边短剧",
-      "type": 3,
-      "api": "csp_XBPQ",
+      "key": "lsp_zy",
+      "name": "🔞 老色批资源 (18+短剧/微视频)",
+      "type": 1,
+      "api": "https://cj.lspzy.com/api.php/provide/vod/",
       "searchable": 1,
       "quickSearch": 1,
-      "filterable": 1,
-      "ext": "https://gh-proxy.org/https://raw.githubusercontent.com/attypd/ynsgu003/main/cbdj/cbdj.json"
+      "filterable": 1
+    },
+    {
+      "key": "69_zy",
+      "name": "🔞 69资源 (18+成人/短片)",
+      "type": 1,
+      "api": "https://www.69ziyuan.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
+    },
+    {
+      "key": "sm_zy",
+      "name": "🔞 色猫资源 (福利/擦边短视频)",
+      "type": 1,
+      "api": "https://semaozy.com/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
+    },
+    {
+      "key": "hg_duanju",
+      "name": "🎬 黄果短剧 (常规爆款短剧)",
+      "type": 1,
+      "api": "https://duanju.jinmoyu.cn/api.php/provide/vod/",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
     }
   ]
 }
