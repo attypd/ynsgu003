@@ -1,38 +1,37 @@
 {
-  "spider": "https://gh-proxy.org/https://raw.githubusercontent.com/h520021/xbpq/main/xbpq.jar",
   "sites": [
     {
-      "key": "lsp_zy",
-      "name": "🔞 老色批资源 (18+短剧/微视频)",
-      "type": 1,
-      "api": "https://cj.lspzy.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
-      "key": "69_zy",
-      "name": "🔞 69资源 (18+成人/短片)",
-      "type": 1,
-      "api": "https://www.69ziyuan.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
-      "key": "sm_zy",
-      "name": "🔞 色猫资源 (福利/擦边短视频)",
-      "type": 1,
-      "api": "https://semaozy.com/api.php/provide/vod/",
-      "searchable": 1,
-      "quickSearch": 1,
-      "filterable": 1
-    },
-    {
       "key": "hg_duanju",
-      "name": "🎬 黄果短剧 (常规爆款短剧)",
+      "name": "🎬 黄果短剧",
       "type": 1,
-      "api": "https://duanju.jinmoyu.cn/api.php/provide/vod/",
+      "api": "https://duanju.jinmoyu.cn/api.php/provide/vod/?ac=detail",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
+    },
+    {
+      "key": "xy_duanju",
+      "name": "⚡ 星芽短剧",
+      "type": 1,
+      "api": "https://sk.sojson.cc/api.php/provide/vod/?ac=detail",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
+    },
+    {
+      "key": "kd_duanju",
+      "name": "💥 酷点短剧",
+      "type": 1,
+      "api": "https://kudian10.com/api.php/provide/vod/?ac=detail",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
+    },
+    {
+      "key": "gz_duanju",
+      "name": "🔥 瓜子短剧",
+      "type": 1,
+      "api": "https://cn.kuhu.net/api.php/provide/vod/?ac=detail",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1
