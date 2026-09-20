@@ -1,0 +1,15 @@
+{
+  "spider": "",
+  "sites": [
+    {
+      "key": "py_hg",
+      "name": "🔥 黄果短剧[py]",
+      "type": 3,
+      "api": "https://gh-proxy.org/https://raw.githubusercontent.com/attypd/ynsgu003/main/huangguo.py",
+      "ext": "",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
+    }
+  ]
+}
