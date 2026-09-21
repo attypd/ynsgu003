@@ -1,0 +1,14 @@
+{
+  "sites": [
+    {
+      "key": "玉女百科",
+      "name": "玉女百科",
+      "type": 3,
+      "api": "https://ghfast.top/https://raw.githubusercontent.com/attypd/ynsgu003/main/ynsgu.py",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "changeable": 0
+    }
+  ]
+}
