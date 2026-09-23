@@ -5,7 +5,7 @@
       "name": "爱奇艺(Python)",
       "type": 3,
       "api": "csp_Python",
-      "ext": "https://gh-proxy.org/https://raw.githubusercontent.com/attypd/ynsgu003/main/爱奇艺.py",
+      "ext": "https://gh-proxy.org/https://raw.githubusercontent.com/attypd/ynsgu003/main/%E7%88%B1%E5%A5%87%E8%89%BA.py",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1
@@ -15,7 +15,7 @@
       "name": "腾讯视频(Python)",
       "type": 3,
       "api": "csp_Python",
-      "ext": "https://gh-proxy.org/https://raw.githubusercontent.com/attypd/ynsgu003/main/腾讯.py",
+      "ext": "https://gh-proxy.org/https://raw.githubusercontent.com/attypd/ynsgu003/main/%E8%85%BE%E8%AE%AF.py",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1
