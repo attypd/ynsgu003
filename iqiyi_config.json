@@ -1,0 +1,14 @@
+{
+  "sites": [
+    {
+      "key": "iqiyi_py",
+      "name": "爱奇艺(Python)",
+      "type": 3,
+      "api": "https://ghproxy.net/https://raw.githubusercontent.com/attypd/ynsgu003/main/aiqiyi.py",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1,
+      "ext": ""
+    }
+  ]
+}
