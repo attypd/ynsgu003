@@ -1,0 +1,14 @@
+{
+  "sites": [
+    {
+      "key": "juzishipin",
+      "name": "🍊 橘汁视频",
+      "type": 3,
+      "api": "csp_Python",
+      "ext": "https://gh-proxy.org/https://raw.githubusercontent.com/attypd/ynsgu003/main/juzi.py",
+      "searchable": 1,
+      "quickSearch": 1,
+      "filterable": 1
+    }
+  ]
+}
