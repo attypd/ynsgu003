@@ -1,11 +1,11 @@
 {
   "sites": [
     {
-      "key": "juzishipin",
-      "name": "🍊 橘汁视频",
+      "key": "missav_free",
+      "name": "🦋 蝴蝶·ThisAV完整版",
       "type": 3,
       "api": "csp_Python",
-      "ext": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/attypd/ynsgu003/main/juzi.py",
+      "ext": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/attypd/ynsgu003/main/missav免翻.py",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1
