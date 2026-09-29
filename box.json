@@ -2,10 +2,10 @@
   "sites": [
     {
       "key": "missav_free",
-      "name": "🦋 蝴蝶·ThisAV完整版",
+      "name": "🦋 蝴蝶·MissAV完整版",
       "type": 3,
       "api": "csp_Python",
-      "ext": "https://cdn.jsdelivr.net/gh/attypd/ynsgu003@main/missav.py",
+      "ext": "https://mirror.ghproxy.com/https://raw.githubusercontent.com/attypd/ynsgu003/main/missav.py",
       "searchable": 1,
       "quickSearch": 1,
       "filterable": 1
