@@ -1,0 +1,31 @@
+name: Hclyz Live Data Sync
+
+on:
+  schedule:
+    - cron: '0 */4 * * *' # 每 4 小时自动更新抓取一次最新鉴权数据
+  workflow_dispatch: # 支持手动点击立马执行
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+
+    - name: Install dependencies
+      run: pip install requests
+
+    - name: Run Spider
+      run: python hclyz_spider.py
+
+    - name: Commit and Push
+      run: |
+        git config --local user.email "actions@github.com"
+        git config --local user.name "actions-user"
+        git add hclyz_data.json
+        git diff --cached --quiet || (git commit -m "Auto Update Hclyz Data" && git push)
