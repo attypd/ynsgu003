@@ -3,10 +3,10 @@
   "wallpaper": "https://tu.ltyuan.top/api.php",
   "sites": [
     {
-      "key": "hclyz_live_picture",
-      "name": " 💃 聚合美女直播 | 海报墙点播模式",
-      "type": 3,
-      "api": "https://gh-proxy.org/https://raw.githubusercontent.com/attypd/ynsgu003/main/hclyz_vod.js",
+      "key": "hclyz_live_static_fast",
+      "name": " 💃 聚合美女直播 | 海报墙极速模式",
+      "type": 1,
+      "api": "https://gh-proxy.org/https://raw.githubusercontent.com/attypd/ynsgu003/main/hclyz_data.json",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
