@@ -3,8 +3,8 @@
   "wallpaper": "https://tu.ltyuan.top/api.php",
   "sites": [
     {
-      "key": "hclyz_live_vod_js",
-      "name": " 💃 聚合美女直播 | 分平台海报墙",
+      "key": "hclyz_smart_vod",
+      "name": " 💃 聚合美女直播 | 推荐与分平台",
       "type": 3,
       "api": "https://gh-proxy.org/https://raw.githubusercontent.com/attypd/ynsgu003/main/hclyz_vod.js",
       "searchable": 0,
