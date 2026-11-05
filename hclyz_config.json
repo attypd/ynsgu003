@@ -1,12 +1,12 @@
 {
-  "spider": "https://gh-proxy.org/https://raw.githubusercontent.com/attypd/ynsgu003/main/hclyz_vod.js",
+  "spider": "",
   "wallpaper": "https://tu.ltyuan.top/api.php",
   "sites": [
     {
-      "key": "hclyz_live_vod_js",
+      "key": "hclyz_live_static",
       "name": " 💃 聚合美女直播 | 海报墙点播模式",
-      "type": 3,
-      "api": "https://gh-proxy.org/https://raw.githubusercontent.com/attypd/ynsgu003/main/hclyz_vod.js",
+      "type": 1,
+      "api": "https://gh-proxy.org/https://raw.githubusercontent.com/attypd/ynsgu003/main/hclyz_data.json",
       "searchable": 0,
       "quickSearch": 0,
       "filterable": 0
