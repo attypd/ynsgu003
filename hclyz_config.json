@@ -4,7 +4,7 @@
   "sites": [
     {
       "key": "hclyz_static_vod",
-      "name": " 💃 聚合美女直播 | 推荐与分平台",
+      "name": " 💃 聚合美女直播",
       "type": 1,
       "api": "https://gh-proxy.org/https://raw.githubusercontent.com/attypd/ynsgu003/main/hclyz_data.json",
       "searchable": 0,
