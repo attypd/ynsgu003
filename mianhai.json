@@ -1,0 +1,32 @@
+{
+  "spider": "https://gh-proxy.com/https://raw.githubusercontent.com/FongMi/CatVodSpider/main/jar/custom_spider.jar",
+  "wallpaper": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop",
+  "sites": [
+    {
+      "key": "mian_hai_py",
+      "name": "🌊 面朝大海（多源）",
+      "type": 3,
+      "api": "csp_Python",
+      "ext": "https://gh-proxy.com/https://raw.githubusercontent.com/attypd/ynsgu003/main/%E9%9D%A2%E6%9C%9D%E5%A4%A7%E6%B5%B7.py",
+      "searchable": 1,
+      "quickable": 1,
+      "filterable": 1
+    }
+  ],
+  "parses": [
+    {
+      "name": "Json聚合",
+      "type": 3,
+      "url": "json"
+    }
+  ],
+  "rules": [
+    {
+      "name": "proxy",
+      "hosts": [
+        "raw.githubusercontent.com",
+        "googlevideo.com"
+      ]
+    }
+  ]
+}
